@@ -40,7 +40,16 @@ export default function Rule() {
     "普段言えないこと",
     "言われて嬉しかった言葉",
     "一生に一度は訪れてみたい場所",
-    "好きなアーティスト"
+    "好きなアーティスト",
+    "得意料理",
+    "異性に言われたいセリフ",
+    "異性の好きな仕草",
+    "初恋",
+    "他の人にオススメしたいこと",
+    "最後に怒ったのはいつ？どんな時？",
+    "生まれ変われるとしたら何になりたいか",
+    "最近テンションが上がったこと",
+    "これだけは辞めれないこと"
   ];
 
   const ShowTheme = () => {
@@ -72,7 +81,7 @@ export default function Rule() {
   return (
     <div className="container">
       <Head>
-        <title>ゲームスタート | Theme Talk</title>
+        <title>Let's Talk! | Theme Talk</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -80,7 +89,7 @@ export default function Rule() {
       <main className="main">
         <div className="inner-container">
           <h1 className="title">
-            GAME <span className="title-accent">START</span>
+            <span className="title-accent">Let's</span> Talk!!
           </h1>
 
           <div className="message-conainer">
@@ -91,14 +100,10 @@ export default function Rule() {
 
           <div className="btn-nav">
             <Link href="/">
-              <a className="sub-btn u-mr20">
-                トップへ戻る
-              </a>
+              <a className="sub-btn u-mr20">トップへ戻る</a>
             </Link>
-            <Link href="#">
-              <a className="btn">
-                次のゲームへ
-            </a>
+            <Link href="/game">
+              <a className="btn">次のテーマへ</a>
             </Link>
           </div>
         </div>

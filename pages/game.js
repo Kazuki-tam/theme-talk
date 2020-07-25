@@ -59,6 +59,7 @@ export default function Rule() {
         <style jsx>{`
           .message-theme {
             font-size: 2.4rem;
+            z-index: 1;
            }
           .message-highlight {
             background:linear-gradient(transparent 65%, #85bdff 65%);
@@ -156,6 +157,7 @@ export default function Rule() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          z-index: 1;
         }
 
         .shutter{
@@ -221,12 +223,10 @@ export default function Rule() {
 
         @keyframes contentScale {
           70% {
-            -webkit-transform: perspective(800px) scale(0.9) rotateX(15deg);
-                    transform: perspective(800px) scale(0.9) rotateX(15deg);
+            opacity: 0;
           }
           100% {
-            -webkit-transform: perspective(800px) scale(1) rotateX(0);
-                    transform: perspective(800px) scale(1) rotateX(0);
+            opacity: 1;
           }
         }
 
@@ -262,15 +262,6 @@ export default function Rule() {
         .footer-text {
           font-size: 1.2rem;
           color: #fff;
-        }
-
-        .kv {
-          width: 400px;
-          margin: 3rem auto;
-
-          img {
-            max-width: 100%;
-          }
         }
 
         .message-conainer {

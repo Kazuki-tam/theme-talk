@@ -230,6 +230,7 @@ export default function Home() {
           border-radius: 3px;
           border: 2px solid #ddd;
           box-sizing: border-box;
+          -webkit-appearance: none;
         }
 
         .form-text {

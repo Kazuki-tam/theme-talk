@@ -84,6 +84,8 @@ export default function Rule() {
         <title>Let's Talk! | Theme Talk</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0070f3" />
+        <meta name="description" content="Theme Talkのゲーム画面です。気持ち良くゲームができるよう相手への気遣いを忘れずプレイしましょう。" />
       </Head>
 
       <div className="shutter"></div>
@@ -111,7 +113,7 @@ export default function Rule() {
       </main>
 
       <footer className="footer">
-        <p className="footer-text">Kazuki Tim</p>
+        <p className="footer-text">Let's have fun together!!</p>
       </footer>
 
       <style jsx global>{`

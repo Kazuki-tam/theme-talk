@@ -37,6 +37,8 @@ export default function Home() {
         <title>Theme Talk</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0070f3" />
+        <meta name="description" content="Theme Talkはンライン飲み会やパーティーで話すお題を指定し、場を盛り上げるのを助けます。"/>
       </Head>
 
       <main>
@@ -49,8 +51,14 @@ export default function Home() {
             <img src="/main.svg" alt="Theme Talk" />
           </div>
 
+          <p className="description u-mb10">
+            オンライン飲み会やパーティーで話すお題をアプリが指定してくれます。<br />まずゲームを始めるには参加人数を入力してください！
+          </p>
+
           <p className="description u-mb20">
-            オンライン飲み会で話すお題をアプリが指定してくれます。<br />ゲームを始めるには参加人数を入力してください！
+            <Link href="/rule">
+              <a className="link">初めての方・利用方法はこちら</a>
+            </Link>
           </p>
 
           <div className="form-container">
@@ -64,7 +72,7 @@ export default function Home() {
       </main>
 
       <footer className="footer">
-        <p className="footer-text">Created by Kazuki Tim</p>
+        <p className="footer-text">Let's have fun together!!</p>
       </footer>
 
       <style jsx global>{`
@@ -191,6 +199,14 @@ export default function Home() {
         .description {
           line-height: 1.5;
           font-size: 1.5rem;
+        }
+
+        .link {
+          color: #0070f3;
+
+          &:hover {
+            text-decoration: none;
+          }
         }
 
         .btn {

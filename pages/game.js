@@ -10,6 +10,9 @@ export default function Rule() {
     if (strageData) {
       let randomNum = Math.floor(Math.random() * strageData) + 1;
       changeMember(randomNum);
+    } else {
+      const host = location.host;
+      location.replace(`https://${host}`);
     }
   });
 

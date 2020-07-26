@@ -31,6 +31,19 @@ export default function Home() {
     }
   }
 
+  function share() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.querySelector("title").textContent,
+        text: document.querySelector("meta[name='description']").getAttribute('content'),
+        url: location.href
+      });
+    }
+    else {
+      alert("申し訳ありません。このブラウザはシェア機能に対応していません。");
+    }
+  }
+
   return (
     <div className="container">
       <Head>
@@ -66,7 +79,9 @@ export default function Home() {
               <input className="form-input" type="number" min="1" max="30" value={member} onChange={(e) => validateInput(e.target.value)} />
             </div>
 
-            <a className="btn" onClick={() => setMember()}>ゲームスタート</a>
+            <a className="btn u-mb20" onClick={() => setMember()}>ゲームスタート</a>
+
+            <button className="share-btn" onClick={() => share()}>このアプリをシェアする</button>
           </div>
         </div>
       </main>
@@ -214,7 +229,8 @@ export default function Home() {
           padding: 2rem 1rem;
           box-sizing: border-box;
           max-width: 380px;
-          margin: 0 auto;
+          margin-right: auto;
+          margin-left: auto;
           text-align: center;
           letter-spacing: 2px;
           font-size: 2.2rem;
@@ -226,6 +242,31 @@ export default function Home() {
 
           &:hover {
             opacity: .7;
+          }
+        }
+
+        .share-btn {
+          display: none;
+          padding: 1.5rem 1rem;
+          box-sizing: border-box;
+          max-width: 380px;
+          margin-right: auto;
+          margin-left: auto;
+          text-align: center;
+          letter-spacing: 2px;
+          font-size: 1.6rem;
+          border: 1px solid #0070f3;
+          border-radius: 1rem;
+          color: #0070f3;
+          background: #fff;
+          cursor: pointer;
+
+          @media (max-width: 1020px) {
+            display: block;
+          }
+
+          @media (max-width: 768px) {
+            font-size: 3.2vw;
           }
         }
 

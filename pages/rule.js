@@ -42,7 +42,7 @@ export default function Home() {
                 <li className="order-list__item">5分ほど話をして落ち着いたら、次のテーマへ移行します。</li>
               </ol>
 
-              <Link href="/rule">
+              <Link href="/">
                 <a className="btn">トップページへ戻る</a>
               </Link>
             </div>
@@ -85,7 +85,7 @@ export default function Home() {
             </div>
           </section>
 
-          <Link href="/rule">
+          <Link href="/">
             <a className="btn">トップページへ戻る</a>
           </Link>
 
@@ -259,6 +259,10 @@ export default function Home() {
 
           &::after {
             right: 0;
+          }
+
+          @media (max-width: 768px) {
+            font-size: 4.8vw;
           }
         }
 

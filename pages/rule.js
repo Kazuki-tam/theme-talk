@@ -5,11 +5,20 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Theme Talk</title>
+        <title>How to use | Theme Talk</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0070f3" />
         <meta name="description" content="Theme Talk（テーマトーク）の利用方法、注意事項が記載されているページです。" />
+        <meta property="og:title" content="How to use | Theme Talk" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://theme-talk.vercel.app/ogp.png" />
+        <meta property="og:url" content="https://theme-talk.vercel.app/" />
+        <meta property="og:description" content="Theme Talk（テーマトーク）の利用方法、注意事項が記載されているページです。" />
+        <meta property="og:site_name" content="How to use | Theme Talk" />
+        <meta property="og:locale" content="ja" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@SiteAccount" />
       </Head>
 
       <main>

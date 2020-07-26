@@ -114,6 +114,15 @@ export default function Rule() {
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0070f3" />
         <meta name="description" content="Theme Talk（テーマトーク）のゲーム画面です。気持ち良くゲームができるよう相手への気遣いを忘れずプレイしましょう。" />
+        <meta property="og:title" content="Let's Talk! | Theme Talk" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://theme-talk.vercel.app/ogp.png" />
+        <meta property="og:url" content="https://theme-talk.vercel.app/" />
+        <meta property="og:description" content="Theme Talk（テーマトーク）のゲーム画面です。気持ち良くゲームができるよう相手への気遣いを忘れずプレイしましょう。" />
+        <meta property="og:site_name" content="Let's Talk! | Theme Talk" />
+        <meta property="og:locale" content="ja" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@SiteAccount" />
       </Head>
 
       <div className="shutter"></div>

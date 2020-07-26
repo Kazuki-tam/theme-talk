@@ -47,11 +47,20 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Theme Talk</title>
+        <title>Theme Talk テーマトーク</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0070f3" />
         <meta name="description" content="Theme Talk（テーマトーク）はオンライン飲み会やパーティーで話すお題を指定し、場を盛りあげます。"/>
+        <meta property="og:title" content="Theme Talk テーマトーク" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://theme-talk.vercel.app/ogp.png" />
+        <meta property="og:url" content="https://theme-talk.vercel.app/" />
+        <meta property="og:description" content="Theme Talk（テーマトーク）はオンライン飲み会やパーティーで話すお題を指定し、場を盛りあげます。" />
+        <meta property="og:site_name" content="Theme Talk テーマトーク" />
+        <meta property="og:locale" content="ja" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@SiteAccount" />
       </Head>
 
       <main>
@@ -76,7 +85,10 @@ export default function Home() {
 
           <div className="form-container">
             <div className="form-group u-mb20">
-              <input className="form-input" type="number" min="1" max="30" value={member} onChange={(e) => validateInput(e.target.value)} />
+              <input id="form-input" className="form-input u-mb20" type="number" min="1" max="30" value={member} onChange={(e) => validateInput(e.target.value)} />
+              <label for="form-input" className="form-label">
+                参加人数を1~30の値で入力してください。
+              </label>
             </div>
 
             <a className="btn u-mb20" onClick={() => setMember()}>ゲームスタート</a>
@@ -278,6 +290,7 @@ export default function Home() {
           max-width: 380px;
           margin-right: auto;
           margin-left: auto;
+          text-align: center;
         }
 
         .form-input {
@@ -289,6 +302,10 @@ export default function Home() {
           border: 2px solid #ddd;
           box-sizing: border-box;
           -webkit-appearance: none;
+        }
+
+        .form-label {
+          font-size: 1.4rem;
         }
 
         .form-text {

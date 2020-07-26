@@ -83,6 +83,7 @@ export default function Rule() {
       <Head>
         <title>Let's Talk! | Theme Talk</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
       </Head>
 
       <div className="shutter"></div>

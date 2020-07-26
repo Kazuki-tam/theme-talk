@@ -9,7 +9,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0070f3" />
-        <meta name="description" content="Theme Talkはンライン飲み会やパーティーで話すお題を指定し、場を盛り上げるのを助けます。" />
+        <meta name="description" content="Theme Talk（テーマトーク）の利用方法、注意事項が記載されているページです。" />
       </Head>
 
       <main>

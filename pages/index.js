@@ -51,7 +51,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0070f3" />
-        <meta name="description" content="Theme Talkはンライン飲み会やパーティーで話すお題を指定し、場を盛り上げるのを助けます。"/>
+        <meta name="description" content="Theme Talk（テーマトーク）はオンライン飲み会やパーティーで話すお題を指定し、場を盛りあげます。"/>
       </Head>
 
       <main>

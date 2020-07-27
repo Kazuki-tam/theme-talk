@@ -17,8 +17,8 @@ export default function Home() {
       alert("入力は1~30までとなります");
     } else {
       localStorage.setItem("gameData", member);
-      const host = location.href;
-      location.href = host + "game";
+      const host = location.host;
+      location.href = `https://${host}/game`;
     }
   };
 

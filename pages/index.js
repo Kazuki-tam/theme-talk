@@ -1,24 +1,38 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import store from 'store';
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
   let [member, changeMember] = useState(6);
+  let [indexChecked, changeIndex] = useState(true);
+  let [themeChecked, changeTheme] = useState(true);
 
   useEffect(() => {
-    let strageData = localStorage.getItem("gameData");
-    if (strageData) {
-      changeMember(strageData);
+    let memberList = store.get("memberList");
+    let checkList = store.get("checkList");
+    if (memberList) {
+      changeMember(memberList);
+    }
+    if (checkList) {
+      changeIndex(checkList.duplicateIndex);
+      // changeTheme(checkList.duplicateTheme);
     }
   }, []);
 
-  function setMember() {
+  function setSetting() {
+    let checkList = {
+      duplicateIndex: indexChecked,
+      // duplicateTheme: themeChecked
+    };
     if (member < 1) {
       alert("入力は1~30までとなります");
     } else {
-      localStorage.setItem("gameData", member);
+      store.set("memberList", member)
+      store.set("checkList", checkList)
       const host = location.host;
-      location.href = `https://${host}/game`;
+      const protocal = location.protocol;
+      location.href = `${protocal}//${host}/game`;
     }
   };
 
@@ -28,6 +42,22 @@ export default function Home() {
       changeMember(30);
     } else {
       changeMember(val);
+    }
+  }
+
+  function handleIndex () {
+    if (indexChecked) {
+      changeIndex(false);
+    } else {
+      changeIndex(true);
+    }
+  }
+
+  function handleTheme() {
+    if (themeChecked) {
+      changeTheme(false);
+    } else {
+      changeTheme(true);
     }
   }
 
@@ -74,7 +104,7 @@ export default function Home() {
           </div>
 
           <p className="description u-mb10">
-            オンライン飲み会やパーティーで話すお題をアプリが指定してくれます。<br />まずゲームを始めるには参加人数を入力してください！
+            オンライン飲み会やパーティーで話すお題をアプリが指定してくれます。<br className="sp-br-none" />まずゲームを始めるには参加人数を入力してください！
           </p>
 
           <p className="description u-mb20">
@@ -91,9 +121,32 @@ export default function Home() {
               </label>
             </div>
 
-            <a className="btn u-mb20" onClick={() => setMember()}>ゲームスタート</a>
+            <div className="form-group u-mb20">
+              <label className="form-label">
+                <input className="checkbox-input" type="checkbox" value="preventIndex" checked={indexChecked} onChange={(e) => handleIndex()} /> 
+                <span className="checkbox-parts">指名番号の重複を避ける</span>
+              </label>
+            </div>
 
-            <button className="share-btn" onClick={() => share()}>このアプリをシェアする</button>
+            {/* <div className="form-group u-mb20">
+              <label className="form-label">
+                <input className="u-mb20" type="checkbox" value="preventIndex" checked={themeChecked} onChange={(e) => handleTheme()} /> テーマの重複を防ぐ
+              </label>
+            </div> */}
+
+            <div className="form-group u-mb20">
+              <button type="button" className="btn u-mb20" onClick={() => setSetting()}>ゲームスタート</button>
+            </div>
+
+            <div className="form-group u-mb20">
+              <button type="button" className="share-btn sp-only" onClick={() => share()}>このアプリをシェアする</button>
+            </div>
+
+            <div className="form-group">
+              <Link href="/share">
+                <a className="share-btn">QRコードでシェアする</a>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
@@ -144,6 +197,26 @@ export default function Home() {
 
       <style jsx>{`
         $main-color: #0070f3;
+
+        .sp-only {
+          display: none !important;
+
+          @media (max-width: 1020px) {
+            display: block !important;
+          }
+        }
+
+        .sp-text-left {
+          @media (max-width: 768px) {
+            text-align: left!important;
+          }
+        }
+
+        .sp-br-none {
+          @media (max-width: 768px) {
+            display: none !important;
+          }
+        }
 
         main {
           width: 100%;
@@ -237,9 +310,14 @@ export default function Home() {
         }
 
         .btn {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          border: none;
           display: block;
           padding: 2rem 1rem;
           box-sizing: border-box;
+          width: 100%;
           max-width: 380px;
           margin-right: auto;
           margin-left: auto;
@@ -258,7 +336,7 @@ export default function Home() {
         }
 
         .share-btn {
-          display: none;
+          display: inline-block;
           padding: 1.5rem 1rem;
           box-sizing: border-box;
           max-width: 380px;
@@ -271,11 +349,8 @@ export default function Home() {
           border-radius: 1rem;
           color: #0070f3;
           background: #fff;
+          text-decoration: none;
           cursor: pointer;
-
-          @media (max-width: 1020px) {
-            display: block;
-          }
 
           @media (max-width: 768px) {
             font-size: 3.2vw;
@@ -310,6 +385,46 @@ export default function Home() {
 
         .form-text {
           font-size: 2.4rem;
+        }
+
+        .checkbox-input{
+          display: none;
+        }
+
+        .checkbox-parts{
+          font-size: 1.6rem;
+          padding-left: 2.6rem;
+          position:relative;
+          margin-right: 2.6rem;
+        }
+
+        .checkbox-parts::before{
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 1.8rem;
+          height: 1.8rem;
+          border: 1px solid #999;
+          border-radius: 5px;
+        }
+
+        .checkbox-input:checked + .checkbox-parts{
+          color: $main-color;
+        }
+
+        .checkbox-input:checked + .checkbox-parts::after{
+          content: "";
+          display: block;
+          position: absolute;
+          top: -.2rem;
+          left: .6rem;
+          width: .7rem;
+          height: 1.4rem;
+          transform: rotate(40deg);
+          border-bottom: 3px solid $main-color;
+          border-right: 3px solid $main-color;
         }
 
         @media (max-width: 768px) {

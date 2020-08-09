@@ -1,20 +1,51 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import store from 'store';
 import React, { useState, useEffect } from 'react';
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from 'react-spring';
 
 export default function Rule() {
+  const memberList = Number(store.get("memberList"));
+  const checkList = store.get("checkList");
+  const arryMemberList = Array.from({ length: memberList }, (_, i) => i + 1);
   let [member, changeMember] = useState(null);
+  let [randomData, changeRandom] = useState(arryMemberList);
+  
   useEffect(() => {
-    let strageData = localStorage.getItem("gameData");
-    if (strageData) {
-      let randomNum = Math.floor(Math.random() * strageData) + 1;
-      changeMember(randomNum);
+    // changeRandom([...Array(memberList).keys()].map(i => ++i));
+    handleGame();
+  }, []);
+
+  function handleGame() {
+    if (memberList) {
+      if (randomData && randomData.length > 0 && checkList.duplicateIndex) {
+        let index = Math.floor(Math.random() * randomData.length);
+        changeMember(randomData[index]);
+
+        if (index >= 0) {
+          randomData.splice(index, 1);
+        }
+      } else if (randomData.length == 0 && checkList.duplicateIndex) {
+        alert("全員にお題が割り振られました！");
+        redirect();
+      } else {
+        let randomNum = Math.floor(Math.random() * memberList) + 1;
+        if (member == randomNum) {
+          handleGame();
+        } else {
+          changeMember(randomNum);
+        }
+      }
     } else {
-      const host = location.host;
-      location.replace(`https://${host}`);
+      redirect();
     }
-  });
+  }
+
+  function redirect () {
+    const host = location.host;
+    const protocal = location.protocol;
+    location.replace(`${protocal}//${host}`);
+  }
 
   const ShowNumber = () => {
     const props = useSpring({
@@ -108,6 +139,12 @@ export default function Rule() {
     const index = Math.floor(Math.random() * themesNum);
     const selectedTheme = themes[index];
 
+    // if (index >= 0 && checkList && checkList.duplicateTheme) {
+    //   themes.splice(index, 1);
+    //   console.log(index);
+    //   console.log(themesNum);
+    // }
+
     const props = useSpring({
       opacity: 1,
       from: { opacity: 0 },
@@ -165,9 +202,7 @@ export default function Rule() {
             <Link href="/">
               <a className="sub-btn u-mr20">トップへ戻る</a>
             </Link>
-            <Link href="/game">
-              <a className="btn">次のテーマへ</a>
-            </Link>
+            <button type="button" className="btn" onClick={(e) => handleGame(e.preventDefault())}>次のテーマへ</button>
           </div>
         </div>
       </main>
@@ -378,6 +413,10 @@ export default function Rule() {
         }
 
         .btn {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          border: none;
           display: block;
           padding: 2rem 1rem;
           box-sizing: border-box;
@@ -389,6 +428,11 @@ export default function Rule() {
           color: #fff;
           background: #0070f3;
           text-decoration: none;
+          cursor: pointer;
+
+          &:hover {
+            opacity: .7;
+          }
 
           @media (max-width: 768px) {
             font-size: 4.2vw;

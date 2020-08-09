@@ -2,6 +2,19 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Home() {
+  function share() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.querySelector("title").textContent,
+        text: document.querySelector("meta[name='description']").getAttribute('content'),
+        url: location.href
+      });
+    }
+    else {
+      alert("申し訳ありません。このブラウザはシェア機能に対応していません。");
+    }
+  }
+
   return (
     <div className="container">
       <Head>
@@ -32,22 +45,23 @@ export default function Home() {
           </div>
 
           <p className="description u-mb10">
-            アプリを開いていただきありがとうございます。<br />
-            利用方法は様々ですが、一例としてサンプルの遊び方を以下に記載しています。<br />
+            アプリを開いていただきありがとうございます。<br className="sp-br-none"/>
+            利用方法は様々ですが、一例としてサンプルの遊び方を以下に記載しています。<br className="sp-br-none"/>
             このアプリを使って楽しい時間をさらに盛り上げてください🎉
           </p>
 
           <section className="u-mb40">
             <div className="sec-content">
-              <h2 className="sub-headding">遊び方のサンプル</h2>
+              <h2 className="sub-headding">遊び方（サンプル）</h2>
               <ol className="order-list u-mb30">
                 <li className="order-list__item">まずは乾杯しましょう🍻</li>
                 <li className="order-list__item">進行役はゲーム参加者へ1から順に番号を割り振ります。<br />(Zoomなどで利用する場合は名前の前に番号を記載すると分かり易いです)</li>
-                <li className="order-list__item">トップページ画面で人数を入力し、ゲームスタートのボタンを押します。</li>
-                <li className="order-list__item">オンラインで利用する場合は画面共有をして、進行役がアプリの操作を行います。</li>
-                <li className="order-list__item">ゲームがスタートすると話し手とお題をアプリが選定して指示を出します。</li>
+                <li className="order-list__item">参加人数をフォームに入力します。</li>
+                <li className="order-list__item">「指名番号の重複を避ける」にチェックをつけると全員に必ず割り振るよう設定されます。（任意）</li>
+                <li className="order-list__item">準備ができたら「ゲームスタート」のボタンを押します。</li>
+                <li className="order-list__item">進行役がアプリの操作を行います。オンラインで行う場合は進行役が画面共有をして操作を行ってください。</li>
+                <li className="order-list__item">話し手とお題をアプリが選定して指示を出します。</li>
                 <li className="order-list__item">指示を受けた人はお題に沿った内容を話します。</li>
-                <li className="order-list__item">話し手に質問などしながら会話を楽しみます。</li>
                 <li className="order-list__item">5分ほど話をして落ち着いたら、次のテーマへ移行します。</li>
               </ol>
 
@@ -60,24 +74,63 @@ export default function Home() {
           <section className="u-mb40">
             <div className="sec-content">
               <h2 className="sub-headding">アプリのインストール方法</h2>
-              <p className="description u-mb10">当アプリはブラウザ上からお使いのデバイスにインストールすることができます。<br/>デバイスにインストールすることで素早くアプリを立ち上げることができます。</p>
-              <p className="description u-mb10">PC, Androidユーザーは以下のリンクを参照してみてください。</p>
+              <p className="description u-mb10">当アプリはブラウザ上からお使いのデバイスにインストールすることができます。<br className="sp-br-none"/>インストールすることで素早くアプリを立ち上げることができます。</p>
+              <p className="description u-mb10">PC, Androidユーザーは以下のガイドを参照してみてください。</p>
+
+              <ol className="order-list u-mb30">
+                <li className="order-list__item">PCでブラウザ(Chrome)を開き、アプリにアクセスします。</li>
+                <li className="order-list__item">アドレスバーの右にある「インストール追加」をクリックします。</li>
+                <li className="order-list__item">ガイドに従ってアプリをインストールします。</li>
+              </ol>
+
+              <ol className="order-list u-mb30">
+                <li className="order-list__item">Android端末でブラウザ(Chrome)を開き、アプリにアクセスします。</li>
+                <li className="order-list__item">[ホーム画面に追加] をタップします。</li>
+                <li className="order-list__item">ガイドに従ってアプリをインストールします。</li>
+              </ol>
 
               <p className="description u-mb40">
                 <a href="https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DDesktop&hl=ja&oco=1" className="link" target="_blank" rel="noopener">Google Chromeでのインストール手順</a>        
               </p>
 
-              <p className="description u-mb10">iPhone、iPadユーザーはsafariを立ち上げて以下手順にしたがってください。</p>
+              <p className="description u-mb10">iPhone、iPadユーザーはSafariを立ち上げて以下手順にしたがってください。</p>
 
-              <p className="description u-mb10">
+              <ol className="order-list u-mb30">
+                <li className="order-list__item">iPhone、iPadでブラウザ(Safari)を開き、アプリにアクセスします。</li>
+                <li className="order-list__item">共有メニューを開き、「ホーム画面に追加」 をタップします。</li>
+                <li className="order-list__item">ガイドに従ってアプリをインストールします。</li>
+              </ol>
+
+              <p className="description img-des u-mb10">
                 <img src="/ios-howto.gif" alt="ホームスクリーン画面" />
               </p>
 
               <p className="description u-mb20">赤枠の「ホーム画面に追加」からインストールします。</p>
 
-              <p className="description u-mb10">
-                <img src="/ios-howto02.gif" alt="ホームスクリーン画面" />
+              <p className="description img-des u-mb10">
+                <img src="/ios-howto02.gif" alt="共有メニュー画面" />
               </p>
+            </div>
+          </section>
+
+          <section className="u-mb40">
+            <div className="sec-content">
+              <h2 className="sub-headding">アプリの共有方法</h2>
+              <p className="description u-mb20">
+                このアプリはURLベースで共有することができます。<br className="sp-br-none"/>
+                スマホ端末及び、一部特定のブラウザをお使いの方は「このアプリをシェアする」から共有機能をご利用いただけます。
+              </p>
+              <div className="form-group u-mb20">
+                <button type="button" className="share-btn" onClick={() => share()}>このアプリをシェアする</button>
+              </div>
+              <p className="description u-mb20">
+                その場でアプリを共有したい場合はQRコードをご利用いただけます。
+              </p>
+              <div className="form-group">
+                <Link href="/share">
+                  <a className="share-btn">QRコードでシェアする</a>
+                </Link>
+              </div>
             </div>
           </section>
 
@@ -90,7 +143,7 @@ export default function Home() {
                 <li className="bullet-list__item">ゲーム内では先輩、後輩、上司、部下といったポジションの優劣関係なく発言することを許容してください。</li>
                 <li className="bullet-list__item">ゲーム内で話した内容は原則ゲーム内に留めるようにしてください。</li>
               </ul>
-              <p className="description">当サービスの利用によって生じた損害や被害について<br/>管理人は一切責任を負いません。</p>
+              <p className="description">当サービスの利用によって生じた損害や被害について<br className="sp-br-none"/>管理人は一切責任を負いません。</p>
             </div>
           </section>
 
@@ -148,6 +201,26 @@ export default function Home() {
       <style jsx>{`
         $main-color: #0070f3;
 
+        .sp-only {
+          display: none !important;
+
+          @media (max-width: 1020px) {
+            display: block !important;
+          }
+        }
+
+        .sp-text-left {
+          @media (max-width: 768px) {
+            text-align: left!important;
+          }
+        }
+
+        .sp-br-none {
+          @media (max-width: 768px) {
+            display: none !important;
+          }
+        }
+
         main {
           width: 100%;
           padding: 5rem 0;
@@ -199,7 +272,7 @@ export default function Home() {
         .order-list__item {
           position: relative;
           margin-bottom: 1rem;
-          padding-left: 1em;
+          padding-left: 1.4em;
           line-height: 1.4;
 
           &::before {
@@ -330,6 +403,10 @@ export default function Home() {
           font-size: 1.6rem;
         }
 
+        .img-des {
+          border: 3px solid $main-color;
+        }
+
         .link {
           color: #0070f3;
 
@@ -381,6 +458,28 @@ export default function Home() {
 
         .form-text {
           font-size: 2.4rem;
+        }
+
+        .share-btn {
+          display: inline-block;
+          padding: 1.5rem 1rem;
+          box-sizing: border-box;
+          max-width: 380px;
+          margin-right: auto;
+          margin-left: auto;
+          text-align: center;
+          letter-spacing: 2px;
+          font-size: 1.6rem;
+          border: 1px solid #0070f3;
+          border-radius: 1rem;
+          color: #0070f3;
+          background: #fff;
+          text-decoration: none;
+          cursor: pointer;
+
+          @media (max-width: 768px) {
+            font-size: 3.2vw;
+          }
         }
 
         @media (max-width: 768px) {

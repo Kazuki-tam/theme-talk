@@ -85,7 +85,7 @@ export default function Home() {
 
               <ol className="order-list u-mb30">
                 <li className="order-list__item">Android端末でブラウザ(Chrome)を開き、アプリにアクセスします。</li>
-                <li className="order-list__item">[ホーム画面に追加] をタップします。</li>
+                <li className="order-list__item">「ホーム画面に追加」をタップします。</li>
                 <li className="order-list__item">ガイドに従ってアプリをインストールします。</li>
               </ol>
 

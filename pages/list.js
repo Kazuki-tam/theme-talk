@@ -3,6 +3,39 @@ import Link from 'next/link';
 import { themes } from '../data/themedata';
 
 export default function ThemeList() {
+  function share() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.querySelector("title").textContent,
+        text: document.querySelector("meta[name='description']").getAttribute('content'),
+        url: location.href
+      });
+    }
+    else {
+      alert("申し訳ありません。このブラウザはシェア機能に対応していません。");
+    }
+  }
+
+  const ShowUrl = () => {
+    const url = location.href;
+    return(
+      <p className="codeWrap">
+        <pre>
+          <code className="code">
+            {url}
+          </code>
+        </pre>
+        <style jsx>{`
+        .codeWrap {
+          background: #EAF1FE;
+          color: #0070f3;
+          display: inline-block;
+          padding: 0 1rem;
+        }
+       `}</style>
+      </p>
+    );
+  } 
 
   const ShowThemes = () => {
     return(
@@ -75,10 +108,15 @@ export default function ThemeList() {
           </div>
 
           <p className="description u-mb10">
-            アプリで出題されるお題をまとめたページです。<br className="sp-br-none" />
-            事前にゲーム参加者へこのURLを共有いただくとお題について話しやすくなります。<br className="sp-br-none"/>
-            話す内容などを考えておきたい時や会話のお題探しにもご活用ください。
+            このアプリで出題されるお題をまとめたページです。<br className="sp-br-none" />
+            事前に以下URLをゲーム参加者へ共有いただくとお題について話しやすくなります。<br className="sp-br-none"/>
+            会話のネタ探しにもご活用ください。
           </p>
+
+          <div className="description u-mb20">
+            <ShowUrl />
+            <button type="button" className="share-btn sp-only" onClick={() => share()}>このページをシェアする</button>
+          </div>
 
           <section className="u-mb40">
             <div className="sec-content">
@@ -308,7 +346,7 @@ export default function ThemeList() {
           margin: 3rem auto;
 
           @media (max-width: 768px) {
-            width: 100%;
+            width: 60%;
           }
 
           img {

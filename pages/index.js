@@ -53,14 +53,6 @@ export default function Home() {
     }
   }
 
-  function handleTheme() {
-    if (themeChecked) {
-      changeTheme(false);
-    } else {
-      changeTheme(true);
-    }
-  }
-
   function share() {
     if (navigator.share) {
       navigator.share({

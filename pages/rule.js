@@ -53,7 +53,7 @@ export default function Home() {
           <section className="u-mb40">
             <div className="sec-content">
               <h2 className="sub-headding">遊び方（サンプル）</h2>
-              <ol className="order-list u-mb30">
+              <ol className="order-list u-mb20">
                 <li className="order-list__item">まずは乾杯しましょう🍻</li>
                 <li className="order-list__item">進行役はゲーム参加者へ1から順に番号を割り振ります。<br />(Zoomなどで利用する場合は名前の前に番号を記載すると分かり易いです)</li>
                 <li className="order-list__item">参加人数をフォームに入力します。</li>
@@ -64,6 +64,16 @@ export default function Home() {
                 <li className="order-list__item">指示を受けた人はお題に沿った内容を話します。</li>
                 <li className="order-list__item">5分ほど話をして落ち着いたら、次のテーマへ移行します。</li>
               </ol>
+
+              <p className="description u-mb10">
+                ＊事前にお題を確認しておくとよりスムーズに会話を進めることができます。
+              </p>
+
+              <p className="description u-mb30">
+                <Link href="/list">
+                  <a className="link">出題されるお題を確認する</a>
+                </Link>
+              </p>
 
               <Link href="/">
                 <a className="btn">トップページへ戻る</a>

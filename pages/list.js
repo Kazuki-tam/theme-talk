@@ -17,7 +17,7 @@ export default function ThemeList() {
   }
 
   const ShowUrl = () => {
-    const url = window.location.href;
+    const url = "https://theme-talk.vercel.app/";
     return(
       <p className="codeWrap">
         <pre>

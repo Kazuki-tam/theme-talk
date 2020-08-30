@@ -17,7 +17,7 @@ export default function ThemeList() {
   }
 
   const ShowUrl = () => {
-    const url = location.href;
+    const url = window.location.href;
     return(
       <p className="codeWrap">
         <pre>

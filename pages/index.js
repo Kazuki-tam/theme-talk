@@ -104,7 +104,9 @@ export default function Home() {
           </div>
 
           <p className="description u-mb10">
-            オンライン飲み会やパーティーで話すお題をアプリが指定してくれます。<br className="sp-br-none" />まずゲームを始めるには参加人数を入力してください！
+            オンライン飲み会やパーティーで話すお題をアプリが指定してくれます。<br className="sp-br-none" />
+            話しやすいお題が出題されるため安心してご利用いただけます。<br className="sp-br-none" />
+            まずゲームを始めるには参加人数を入力してください！
           </p>
 
           <p className="description u-mb20">
@@ -147,6 +149,12 @@ export default function Home() {
                 <a className="share-btn">QRコードでシェアする</a>
               </Link>
             </div>
+
+            <p className="description">
+              <Link href="/list">
+                <a className="link">出題されるお題を確認する</a>
+              </Link>
+            </p>
           </div>
         </div>
       </main>

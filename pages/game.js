@@ -73,12 +73,6 @@ export default function Rule() {
     const index = Math.floor(Math.random() * themesNum);
     const selectedTheme = themes[index];
 
-    // if (index >= 0 && checkList && checkList.duplicateTheme) {
-    //   themes.splice(index, 1);
-    //   console.log(index);
-    //   console.log(themesNum);
-    // }
-
     const props = useSpring({
       opacity: 1,
       from: { opacity: 0 },

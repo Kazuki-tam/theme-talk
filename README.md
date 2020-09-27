@@ -1,4 +1,9 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Theme Talk
+Theme Talk is a progressive web application(PWA) which provides us some themes to talk with other people in an online drinking party.
+
+[App url](https://theme-talk.vercel.app/)
+
+[オンライン飲み会や会話を盛り上げるアプリTheme Talk](https://note.com/yonemoto/n/n1e5836c6b2dd)
 
 ## Getting Started
 

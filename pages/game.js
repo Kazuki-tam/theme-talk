@@ -5,21 +5,26 @@ import store from 'store';
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 
-export default function Rule() {
+export default function Game() {
+  // Localstrageから参加数取得
   const memberList = Number(store.get("memberList"));
+  // Localstrageからチェックリスト（番号重複可否、名前付与の可否）取得
   const checkList = store.get("checkList");
-  const arryMemberList = Array.from({ length: memberList }, (_, i) => i + 1);
+  // 1~参加数だけ番号を割り振る配列作成
+  let arryMemberList = Array.from({ length: memberList }, (_, i) => i + 1);
   let [member, changeMember] = useState(null);
+  let [userName, changeUserName] = useState({ values: arryMemberList });
   let [randomData, changeRandom] = useState(arryMemberList);
   
   useEffect(() => {
-    // changeRandom([...Array(memberList).keys()].map(i => ++i));
     handleGame();
   }, []);
 
+  // 割り振りの制御
   function handleGame() {
     if (memberList) {
       if (randomData && randomData.length > 0 && checkList.duplicateIndex) {
+        // 重複を避ける場合
         let index = Math.floor(Math.random() * randomData.length);
         changeMember(randomData[index]);
 
@@ -30,6 +35,7 @@ export default function Rule() {
         alert("全員にお題が割り振られました！");
         redirect();
       } else {
+        // 重複を避けない場合
         let randomNum = Math.floor(Math.random() * memberList) + 1;
         if (member == randomNum) {
           handleGame();
@@ -42,12 +48,14 @@ export default function Rule() {
     }
   }
 
+  // トップへリダイレクト
   function redirect () {
     const host = location.host;
     const protocal = location.protocol;
     location.replace(`${protocal}//${host}`);
   }
 
+  // 指名番号の表示
   const ShowNumber = () => {
     const props = useSpring({
       opacity: 1,
@@ -68,6 +76,35 @@ export default function Rule() {
     );
   }
 
+  const handleName = (index, e) => {
+    changeUserName({
+      values: { ...userName.values, [index]: e.target.value }
+    });
+  }
+
+  const setName = () => {
+    console.log("テスト送信");
+  }
+
+  // 名前入力フィールド表示
+  const ShowInputField = () => {
+    return (
+      <form onSubmit={setName}>
+        <div className="name-form">
+          {arryMemberList.map((item, index) => {
+            return <div key={index} id={"user" + index.toString()} className="form-group u-mb10">
+              <label>{item}:</label>
+              <input value={userName[index]} onChange={handleName.bind(this, index)} className="form-input" type="text" /></div>
+          })}
+          <div className="form-group">
+            <button type="submit" className="btn">変更を保存</button>
+          </div>
+        </div>
+     </form>
+    );
+  }
+
+  // テーマの表示
   const ShowTheme = () => {
     const themesNum = themes.length;
     const index = Math.floor(Math.random() * themesNum);
@@ -133,8 +170,8 @@ export default function Rule() {
             <button type="button" className="btn" onClick={(e) => handleGame(e.preventDefault())}>次のテーマへ</button>
           </div>
         </div>
+        <ShowInputField />
       </main>
-
       <footer className="footer">
         <p className="footer-text">Let's have fun together!!</p>
       </footer>

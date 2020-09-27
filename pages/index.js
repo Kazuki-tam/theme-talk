@@ -4,38 +4,47 @@ import store from 'store';
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
+  // ステート管理
   let [member, changeMember] = useState(6);
   let [indexChecked, changeIndex] = useState(true);
-  let [themeChecked, changeTheme] = useState(true);
+  let [nameChecked, changeName] = useState(true);
 
   useEffect(() => {
     let memberList = store.get("memberList");
     let checkList = store.get("checkList");
+    // Local starageにmemberListが格納されていた場合
     if (memberList) {
       changeMember(memberList);
     }
+    // Local starageにcheckListが格納されていた場合
     if (checkList) {
       changeIndex(checkList.duplicateIndex);
-      // changeTheme(checkList.duplicateTheme);
+      changeName(checkList.nameIndex);
     }
   }, []);
 
   function setSetting() {
     let checkList = {
+      // 番号重複の可否
       duplicateIndex: indexChecked,
-      // duplicateTheme: themeChecked
+      // 名前付与の可否
+      nameIndex: nameChecked,
     };
     if (member < 1) {
+      // 入力バリデーションのアラート
       alert("入力は1~30までとなります");
     } else {
+      // Local starageへ格納
       store.set("memberList", member)
       store.set("checkList", checkList)
+      // ゲームページへリダイレクト
       const host = location.host;
       const protocal = location.protocol;
       location.href = `${protocal}//${host}/game`;
     }
   };
 
+  // 参加数入力バリデーション
   function validateInput (val) {
     if (30 < val) {
       alert("入力は30までとなります");
@@ -45,6 +54,7 @@ export default function Home() {
     }
   }
 
+  // 指名番号重複の可否
   function handleIndex () {
     if (indexChecked) {
       changeIndex(false);
@@ -53,6 +63,16 @@ export default function Home() {
     }
   }
 
+  // 名前付与の可否
+  function handleName() {
+    if (nameChecked) {
+      changeName(false);
+    } else {
+      changeName(true);
+    }
+  }
+
+  // Web share API利用
   function share() {
     if (navigator.share) {
       navigator.share({
@@ -115,18 +135,19 @@ export default function Home() {
               </label>
             </div>
 
-            <div className="form-group u-mb20">
+            <div className="form-group u-mb10">
               <label className="form-label">
                 <input className="checkbox-input" type="checkbox" value="preventIndex" checked={indexChecked} onChange={(e) => handleIndex()} /> 
-                <span className="checkbox-parts">指名番号の重複を避ける</span>
+                <span className="checkbox-parts">指名の重複を避ける</span>
               </label>
             </div>
 
-            {/* <div className="form-group u-mb20">
+            <div className="form-group u-mb20">
               <label className="form-label">
-                <input className="u-mb20" type="checkbox" value="preventIndex" checked={themeChecked} onChange={(e) => handleTheme()} /> テーマの重複を防ぐ
+                <input className="checkbox-input" type="checkbox" value="preventIndex" checked={nameChecked} onChange={(e) => handleName()} />
+                <span className="checkbox-parts">番号に名前をいれる</span>
               </label>
-            </div> */}
+            </div>
 
             <div className="form-group u-mb20">
               <button type="button" className="btn u-mb20" onClick={() => setSetting()}>ゲームスタート</button>

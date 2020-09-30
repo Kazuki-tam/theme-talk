@@ -126,13 +126,13 @@ export default function Home() {
           <section className="u-mb40">
             <div className="sec-content">
               <h2 className="sub-headding">アプリの共有方法</h2>
-              <p className="description u-mb20">
+              {/* <p className="description u-mb20">
                 このアプリはURLベースで共有することができます。<br className="sp-br-none"/>
                 スマホ端末及び、一部特定のブラウザをお使いの方は「このアプリをシェアする」から共有機能をご利用いただけます。
-              </p>
-              <div className="form-group u-mb20">
+              </p> */}
+              {/* <div className="form-group u-mb20">
                 <button type="button" className="share-btn" onClick={() => share()}>このアプリをシェアする</button>
-              </div>
+              </div> */}
               <p className="description u-mb20">
                 その場でアプリを共有したい場合はQRコードをご利用いただけます。
               </p>

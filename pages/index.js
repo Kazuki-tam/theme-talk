@@ -132,9 +132,9 @@ export default function Home() {
               <button type="button" className="btn u-mb20" onClick={() => setSetting()}>ゲームスタート</button>
             </div>
 
-            <div className="form-group u-mb20">
+            {/* <div className="form-group u-mb20">
               <button type="button" className="share-btn sp-only" onClick={() => share()}>このアプリをシェアする</button>
-            </div>
+            </div> */}
 
             <div className="form-group">
               <Link href="/share">

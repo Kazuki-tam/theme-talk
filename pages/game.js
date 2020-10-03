@@ -9,11 +9,16 @@ export default function Rule() {
   const memberList = Number(store.get("memberList"));
   const checkList = store.get("checkList");
   const arryMemberList = Array.from({ length: memberList }, (_, i) => i + 1);
+  const themesNum = themes.length;
+  const themesIndex = Math.floor(Math.random() * themesNum);
+  const selectedTheme = themes[themesIndex];
+
+  let [theme, changeTheme] = useState(selectedTheme);
   let [member, changeMember] = useState(null);
+  let [memberActive, setMemberActive] = useState(true);
   let [randomData, changeRandom] = useState(arryMemberList);
   
   useEffect(() => {
-    // changeRandom([...Array(memberList).keys()].map(i => ++i));
     handleGame();
   }, []);
 
@@ -37,6 +42,7 @@ export default function Rule() {
           changeMember(randomNum);
         }
       }
+      handleTheme();
     } else {
       redirect();
     }
@@ -48,10 +54,20 @@ export default function Rule() {
     location.replace(`${protocal}//${host}`);
   }
 
+  function handleTheme(event, val) {
+    if (val == "onlyTheme") {
+      setMemberActive(false);
+    } else {
+      setMemberActive(true);
+    }
+
+    changeTheme(selectedTheme);
+  }
+
   const ShowNumber = () => {
     const props = useSpring({
       opacity: 1,
-      from: { opacity: 0 },
+      from: { opacity: memberActive ? 0 : 1 },
       config: { duration: 1000 }
     });
     return (
@@ -69,10 +85,6 @@ export default function Rule() {
   }
 
   const ShowTheme = () => {
-    const themesNum = themes.length;
-    const index = Math.floor(Math.random() * themesNum);
-    const selectedTheme = themes[index];
-
     const props = useSpring({
       opacity: 1,
       from: { opacity: 0 },
@@ -80,7 +92,7 @@ export default function Rule() {
     });
     return (
     <div>
-        <animated.p className="message-theme" style={props}><span className="message-highlight">{selectedTheme}</span></animated.p>
+        <animated.p className="message-theme" style={props}><span className="message-highlight">{theme}</span></animated.p>
         <style jsx>{`
           .message-theme {
             font-size: 2.4rem;
@@ -126,11 +138,15 @@ export default function Rule() {
             <p className="text">について話す</p>
           </div>
 
-          <div className="btn-nav">
+          <div className="btn-nav u-mb20">
             <Link href="/">
               <a className="sub-btn u-mr20">トップへ戻る</a>
             </Link>
             <button type="button" className="btn" onClick={(e) => handleGame(e.preventDefault())}>次のテーマへ</button>
+          </div>
+
+          <div className="btn-nav">
+            <button type="button" className="skip-btn" onClick={(e) => handleTheme(e.preventDefault(), "onlyTheme")}>＊テーマだけ変える</button>
           </div>
         </div>
       </main>
@@ -383,6 +399,24 @@ export default function Rule() {
 
           @media (max-width: 768px) {
             font-size: 4.2vw;
+          }
+        }
+
+        .skip-btn {
+          display: inline-block;
+          font-size: 1.6rem;
+          background: transparent;
+          border: none;
+          color: #0070f3;
+          text-decoration: underline;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          outline: none;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: none;
           }
         }
 

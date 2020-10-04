@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { themes } from '../data/themedata';
+import { generalThemes, schoolThemes, jobThemes } from '../data/themedata';
 import store from 'store';
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
@@ -8,7 +8,20 @@ import { useSpring, animated } from 'react-spring';
 export default function Rule() {
   const memberList = Number(store.get("memberList"));
   const checkList = store.get("checkList");
+  const categoryList = store.get("categoryList");
   const arryMemberList = Array.from({ length: memberList }, (_, i) => i + 1);
+
+  let themes;
+  if (categoryList == "general") {
+    themes = generalThemes;
+  } else if (categoryList == "school") {
+    themes = schoolThemes;
+  } else if (categoryList == "job-hunting") {
+    themes = jobThemes;
+  } else {
+    themes = generalThemes;
+  }
+
   const themesNum = themes.length;
   const themesIndex = Math.floor(Math.random() * themesNum);
   const selectedTheme = themes[themesIndex];
@@ -16,6 +29,7 @@ export default function Rule() {
   let [theme, changeTheme] = useState(selectedTheme);
   let [member, changeMember] = useState(null);
   let [memberActive, setMemberActive] = useState(true);
+  let [messageActive, setMessageActive] = useState(false);
   let [randomData, changeRandom] = useState(arryMemberList);
   
   useEffect(() => {
@@ -62,6 +76,10 @@ export default function Rule() {
     }
 
     changeTheme(selectedTheme);
+    if (theme == selectedTheme) {
+      const themesreIndex = Math.floor(Math.random() * themesNum);
+      changeTheme(themes[themesreIndex]);
+    }
   }
 
   const ShowNumber = () => {
@@ -106,6 +124,79 @@ export default function Rule() {
     );
   }
 
+  const ShowMessage = () => {
+    if (randomData.length == 0) {
+      setMessageActive(true);
+    }
+
+    return (
+      <p className={`theme-message ${messageActive ? "is-active" : ""}`}>
+        ＊これが最後のお題です。
+
+        <style jsx>{`
+          .theme-message {
+            font-size: 1.4rem;
+            color: #0070f3;
+            display: none;
+          }
+          .is-active {
+            display: block;
+          }
+       `}</style>
+      </p>
+    );
+  }
+
+  const ShowCategory = () => {
+    let categoryName;
+    if (categoryList == "general") {
+      categoryName = "一般的なテーマ";
+    } else if (categoryList == "school") {
+      categoryName = "学校向けテーマ";
+    } else if (categoryList == "job-hunting") {
+      categoryName = "就活対策テーマ";
+    } else {
+      categoryName = "一般的なテーマ";
+    }
+
+    return (
+      <span className="category-name">
+        {categoryName}
+
+        <style jsx>{`
+          .category-name {
+            font-size: 1.8rem;
+            font-weight: normal;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            padding: 0 5.5rem;
+            text-align: center;
+            font-size: 2.4rem;
+          }
+
+          .category-name::before, :after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            display: inline-block;
+            width: 4.5rem;
+            height: 2px;
+            background-color: #0070f3;
+          }
+
+          .category-name::before {
+            left: 0;
+          }
+
+          .category-name::after {
+            right: 0;
+          }
+       `}</style>
+      </span>
+    );
+  }
+
   return (
     <div className="container">
       <Head>
@@ -129,13 +220,15 @@ export default function Rule() {
       <main className="main">
         <div className="inner-container">
           <h1 className="title">
-            <span className="title-accent">Let's</span> Talk!!
+            <span className="title-accent">Let's</span> Talk!!<br />
+            <ShowCategory />
           </h1>
 
           <div className="message-conainer">
             <ShowNumber />
             <ShowTheme />
             <p className="text">について話す</p>
+            <ShowMessage />
           </div>
 
           <div className="btn-nav u-mb20">
@@ -336,7 +429,7 @@ export default function Rule() {
 
         .title {
           margin: 0;
-          line-height: 1.15;
+          line-height: 1;
           font-size: 5.6rem;
         }
 

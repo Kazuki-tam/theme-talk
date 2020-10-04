@@ -4,6 +4,7 @@ import store from 'store';
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
+  let [category, changeCategory] = useState("general");
   let [member, changeMember] = useState(6);
   let [indexChecked, changeIndex] = useState(true);
   let [themeChecked, changeTheme] = useState(true);
@@ -11,12 +12,16 @@ export default function Home() {
   useEffect(() => {
     let memberList = store.get("memberList");
     let checkList = store.get("checkList");
+    let categoryList = store.get("categoryList");
     if (memberList) {
       changeMember(memberList);
     }
     if (checkList) {
       changeIndex(checkList.duplicateIndex);
       // changeTheme(checkList.duplicateTheme);
+    }
+    if (categoryList) {
+      changeCategory(categoryList);
     }
   }, []);
 
@@ -28,8 +33,9 @@ export default function Home() {
     if (member < 1) {
       alert("入力は1~30までとなります");
     } else {
-      store.set("memberList", member)
-      store.set("checkList", checkList)
+      store.set("memberList", member);
+      store.set("checkList", checkList);
+      store.set("categoryList", category);
       const host = location.host;
       const protocal = location.protocol;
       location.href = `${protocal}//${host}/game`;
@@ -66,6 +72,38 @@ export default function Home() {
     }
   }
 
+  const ThemeCategory = () => {
+    let categoryName;
+    if (category == "general") {
+      categoryName = "一般的なテーマ";
+    } else if (category == "school") {
+      categoryName = "学校向けテーマ";
+    } else if (category == "job-hunting") {
+      categoryName = "就活対策テーマ";
+    } else {
+      categoryName = "一般的なテーマ";
+    }
+    return (
+      <div>
+      <p className="form-select-label">
+        {categoryName}
+      </p>  
+      <style jsx>{`
+          .form-select-label {
+            width: 100%;
+            font-size: 1.8rem;
+            z-index: 0;
+            padding: 1rem 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 3px;
+            background: #fff;
+            margin: 0;
+          }
+       `}</style>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <Head>
@@ -96,23 +134,41 @@ export default function Home() {
           </div>
 
           <p className="description u-mb10">
-            オンライン飲み会やパーティーで話すお題をアプリが指定してくれます。<br className="sp-br-none" />
-            話しやすいお題が出題されるため安心してご利用いただけます。<br className="sp-br-none" />
-            まずゲームを始めるには参加人数を入力してください！
+            オンライン飲み会や学校現場、就職活動など<br className="sp-br-none" />
+            様々なシーンに合わせたお題をアプリが指定してくれます。<br className="sp-br-none" />
+            テーマジャンルと参加人数を入力すると直ぐにゲームを始められます！
+          </p>
+
+          <p className="description u-mb10">
+            <Link href="/rule">
+              <a className="link">初めての方・ご利用方法はこちら</a>
+            </Link>
           </p>
 
           <p className="description u-mb20">
-            <Link href="/rule">
-              <a className="link">初めての方・利用方法はこちら</a>
+            <Link href="/list">
+              <a className="link">出題されるお題を確認する</a>
             </Link>
           </p>
 
           <div className="form-container">
-            <div className="form-group u-mb20">
-              <input id="form-input" className="form-input u-mb20" type="number" min="1" max="30" value={member} onChange={(e) => validateInput(e.target.value)} />
-              <label for="form-input" className="form-label">
-                参加人数を1~30の値で入力してください。
+            <div className="form-group arrow-bottom u-mb20">
+              <label for="form-select" className="form-label u-mb5">
+                テーマのジャンルを選択
               </label>
+              <ThemeCategory />
+              <select id="form-select" className="form-select" value={category} onChange={(e) => changeCategory(e.target.value)}>
+                <option value="general">一般的なテーマ</option>
+                <option value="school">学校向けテーマ</option>
+                <option value="job-hunting">就活対策テーマ</option>
+              </select>
+            </div>
+
+            <div className="form-group u-mb20">
+              <label for="form-input" className="form-label u-mb5">
+                参加人数を入力（1~30）
+              </label>
+              <input id="form-input" className="form-input" type="number" min="1" max="30" value={member} onChange={(e) => validateInput(e.target.value)} />
             </div>
 
             <div className="form-group u-mb20">
@@ -141,12 +197,6 @@ export default function Home() {
                 <a className="share-btn">QRコードでシェアする</a>
               </Link>
             </div>
-
-            <p className="description">
-              <Link href="/list">
-                <a className="link">出題されるお題を確認する</a>
-              </Link>
-            </p>
           </div>
         </div>
       </main>
@@ -379,12 +429,50 @@ export default function Home() {
           -webkit-appearance: none;
         }
 
+        .form-select {
+          display: block;
+          width: 100%;
+          padding: 1rem 1.5rem;
+          position: absolute;
+          bottom: 3%;
+          padding: 1rem 1.5rem;
+          border: 2px solid #ddd;
+          border-radius: 3px;
+          font-size: 1.8rem;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          opacity: 0;
+          z-index: 2;
+          cursor: pointer;
+        }
+
         .form-label {
-          font-size: 1.4rem;
+          display: inline-block;
+          font-size: 1.5rem;
+          cursor: pointer;
         }
 
         .form-text {
           font-size: 2.4rem;
+        }
+
+        .arrow-bottom {
+          position: relative;
+
+          &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 28%;
+            right: 2%;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-top: 2px solid #ccc;
+            border-right: 2px solid #ccc;
+            transform: translateX(-50%) rotate(135deg);
+            pointer-events: none;
+          }
         }
 
         .checkbox-input{

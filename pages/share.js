@@ -40,9 +40,15 @@ export default function Home() {
             <a className="btn u-mb20">トップページへ戻る</a>
           </Link>
 
-          <p className="description">
+          <p className="description u-mb10">
             <Link href="/rule">
-              <a className="link">初めての方・利用方法はこちら</a>
+              <a className="link">初めての方・ご利用方法はこちら</a>
+            </Link>
+          </p>
+
+          <p className="description">
+            <Link href="/list">
+              <a className="link">出題されるお題を確認する</a>
             </Link>
           </p>
 

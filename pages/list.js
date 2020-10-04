@@ -1,8 +1,13 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { themes } from '../data/themedata';
+import { generalThemes, schoolThemes, jobThemes } from '../data/themedata';
+import React, { useState, useEffect } from 'react';
 
 export default function ThemeList() {
+  let [accordionActive, setAccordionActive] = useState(false);
+  let [accordionActive2, setAccordionActive2] = useState(false);
+  let [accordionActive3, setAccordionActive3] = useState(false);
+
   function share() {
     if (navigator.share) {
       navigator.share({
@@ -35,14 +40,134 @@ export default function ThemeList() {
        `}</style>
       </p>
     );
-  } 
+  }
+
+  function handleAccordion () {
+    if (accordionActive == false) {
+      setAccordionActive(true);
+    } else {
+      setAccordionActive(false);
+    }
+  }
+
+  function handleAccordion2() {
+    if (accordionActive2 == false) {
+      setAccordionActive2(true);
+    } else {
+      setAccordionActive2(false);
+    }
+  }
+
+  function handleAccordion3() {
+    if (accordionActive3 == false) {
+      setAccordionActive3(true);
+    } else {
+      setAccordionActive3(false);
+    }
+  }
 
   const ShowThemes = () => {
+
     return(
-      <ol className="order-list">
-        {themes.map(val => <li className="order-list__item"><span className="message-bold">{val}</span> について話す</li>)}
+      <dl className="p-accordion">
+        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive ? "is-accordion-active" : ""}`} onClick={(e) => handleAccordion(e.preventDefault())}>一般的なテーマ</button></dt>
+        <dd className={`p-accordion__body ${accordionActive ? "is-accordion-open" : ""}`}>
+          <ol className="order-list">
+            {generalThemes.map(val => <li className="order-list__item"><span className="message-bold">{val}</span> について話す</li>)}
+          </ol>
+        </dd>
+
+        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive2 ? "is-accordion-active" : ""}`} onClick={(e) => handleAccordion2(e.preventDefault())}>学校向けテーマ</button></dt>
+        <dd className={`p-accordion__body ${accordionActive2 ? "is-accordion-open" : ""}`}>
+          <ol className="order-list">
+            {schoolThemes.map(val => <li className="order-list__item"><span className="message-bold">{val}</span> について話す</li>)}
+          </ol>
+        </dd>
+
+        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive3 ? "is-accordion-active" : ""}`} onClick={(e) => handleAccordion3(e.preventDefault())}>就活対策テーマ</button></dt>
+        <dd className={`p-accordion__body ${accordionActive3 ? "is-accordion-open" : ""}`}>
+          <ol className="order-list">
+            {jobThemes.map(val => <li className="order-list__item"><span className="message-bold">{val}</span> について話す</li>)}
+          </ol>
+        </dd>
 
         <style jsx>{`
+        .p-accordion {
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+        }
+        .p-accordion__btn {
+          background-color: #fff;
+          border: none;
+          border-bottom: 1px solid #0070f3;
+          color: #0070f3;
+          cursor: pointer;
+          display: block;
+          font-size: 1.6rem;
+          margin: 0;
+          outline: 0;
+          padding: 1rem 4rem 1rem 1.5rem;
+          position: relative;
+          text-align: left;
+          width: 100%;
+        }
+        .p-accordion__btn::before {
+          background-color: currentColor;
+          content: "";
+          display: block;
+          height: 2px;
+          position: absolute;
+          right: 1.5rem;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 20px;
+        }
+        .p-accordion__btn::after {
+          background-color: currentColor;
+          content: "";
+          display: block;
+          height: 20px;
+          position: absolute;
+          right: 2.4rem;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 2px;
+        }
+        .p-accordion__btn:focus,
+        .p-accordion__btn:hover {
+          background-color: #0070f3;
+          color: #fff;
+        }
+        .p-accordion__body {
+          height: 0;
+          line-height: 0;
+          opacity: 0;
+          overflow: hidden;
+          padding: 0 1.5rem;
+          transition: padding .25s,opacity .25s;
+        }
+        .p-accordion__body > :last-child {
+          margin-bottom: 0;
+        }
+        .p-accordion__txt {
+          margin-bottom: 2rem;
+        }
+        .is-accordion-active {
+          border-bottom: none;
+          background-color: #0070f3;
+          color: #fff;
+        }
+        .is-accordion-active::after {
+          content: none;
+        }
+        .is-accordion-open {
+          height: auto;
+          line-height: normal;
+          opacity: 1;
+          padding: 1.5rem;
+          margin-left: 0;
+        }
         .message-bold {
           font-weight: bold;
           color: #0070f3;
@@ -53,6 +178,7 @@ export default function ThemeList() {
           counter-reset: order-list;
           list-style: none;
           margin-bottom: 30px;
+          padding-left: 0;
         }
         .order-list__item {
           position: relative;
@@ -74,7 +200,7 @@ export default function ThemeList() {
           }
         }
        `}</style>
-      </ol>
+      </dl>
     );
   };
 
@@ -121,7 +247,14 @@ export default function ThemeList() {
           <section className="u-mb40">
             <div className="sec-content">
               <h2 className="sub-headding">お題リスト集</h2>
-              <ShowThemes />
+
+              <p className="description u-mb10">
+                ゲームで使用されているお題を以下で確認することができます。
+              </p>
+
+              <div className="theme-list u-mb40">
+                <ShowThemes />
+              </div>
 
               <Link href="/">
                 <a className="btn">トップページへ戻る</a>
@@ -302,6 +435,7 @@ export default function ThemeList() {
           padding: 0 5.5rem;
           text-align: center;
           font-size: 2.4rem;
+          margin: 0;
 
           &::before, &::after {
             content: '';

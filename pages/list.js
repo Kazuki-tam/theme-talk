@@ -1,12 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { generalThemes, schoolThemes, jobThemes } from '../data/themedata';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function ThemeList() {
-  let [accordionActive, setAccordionActive] = useState(false);
-  let [accordionActive2, setAccordionActive2] = useState(false);
-  let [accordionActive3, setAccordionActive3] = useState(false);
+  let [accordionActive, setAccordionActive] = useState([false, false, false]);
 
   function share() {
     if (navigator.share) {
@@ -42,27 +40,15 @@ export default function ThemeList() {
     );
   }
 
-  function handleAccordion () {
-    if (accordionActive == false) {
-      setAccordionActive(true);
+  function handleAccordion (index) {
+    if (index == 0 && accordionActive[index] == false) {
+      setAccordionActive([true, false, false]);
+    } else if (index == 1 && accordionActive[index] == false) {
+      setAccordionActive([false, true, false]);
+    } else if (index == 2 && accordionActive[index] == false) {
+      setAccordionActive([false, false, true]);
     } else {
-      setAccordionActive(false);
-    }
-  }
-
-  function handleAccordion2() {
-    if (accordionActive2 == false) {
-      setAccordionActive2(true);
-    } else {
-      setAccordionActive2(false);
-    }
-  }
-
-  function handleAccordion3() {
-    if (accordionActive3 == false) {
-      setAccordionActive3(true);
-    } else {
-      setAccordionActive3(false);
+      setAccordionActive([false, false, false]);
     }
   }
 
@@ -70,22 +56,22 @@ export default function ThemeList() {
 
     return(
       <dl className="p-accordion">
-        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive ? "is-accordion-active" : ""}`} onClick={(e) => handleAccordion(e.preventDefault())}>一般的なテーマ</button></dt>
-        <dd className={`p-accordion__body ${accordionActive ? "is-accordion-open" : ""}`}>
+        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive[0] ? "is-accordion-active" : ""}`} onClick={(e) => {e.preventDefault(); handleAccordion(0);}}>一般的なテーマ</button></dt>
+        <dd className={`p-accordion__body ${accordionActive[0] ? "is-accordion-open" : ""}`}>
           <ol className="order-list">
             {generalThemes.map(val => <li className="order-list__item"><span className="message-bold">{val}</span> について話す</li>)}
           </ol>
         </dd>
 
-        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive2 ? "is-accordion-active" : ""}`} onClick={(e) => handleAccordion2(e.preventDefault())}>学校向けテーマ</button></dt>
-        <dd className={`p-accordion__body ${accordionActive2 ? "is-accordion-open" : ""}`}>
+        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive[1] ? "is-accordion-active" : ""}`} onClick={(e) => { e.preventDefault(); handleAccordion(1); }}>学校向けテーマ</button></dt>
+        <dd className={`p-accordion__body ${accordionActive[1] ? "is-accordion-open" : ""}`}>
           <ol className="order-list">
             {schoolThemes.map(val => <li className="order-list__item"><span className="message-bold">{val}</span> について話す</li>)}
           </ol>
         </dd>
 
-        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive3 ? "is-accordion-active" : ""}`} onClick={(e) => handleAccordion3(e.preventDefault())}>就活対策テーマ</button></dt>
-        <dd className={`p-accordion__body ${accordionActive3 ? "is-accordion-open" : ""}`}>
+        <dt className="p-accordion__ttl"><button className={`p-accordion__btn ${accordionActive[2] ? "is-accordion-active" : ""}`} onClick={(e) => { e.preventDefault(); handleAccordion(2); }}>就活対策テーマ</button></dt>
+        <dd className={`p-accordion__body ${accordionActive[2] ? "is-accordion-open" : ""}`}>
           <ol className="order-list">
             {jobThemes.map(val => <li className="order-list__item"><span className="message-bold">{val}</span> について話す</li>)}
           </ol>

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function CreateTheme() {
   const [themes, setThemes] = useState([]);
-  const [tmpThemes, setTmpThemes] = useState([]);
+  const [tmpThemes, setTmpThemes] = useState("");
 
   useEffect(() => {
     let customThemesList = store.get("customThemesList");
@@ -20,7 +20,7 @@ export default function CreateTheme() {
     });
 
     if (tmpThemes === "") {
-      alert("テーマを入力してください!");
+      alert("テーマを入力してください👀");
       return false;
     } else if (filteredTheme.length > 0) {
       alert("入力したテーマは既に登録済みです😇");
@@ -82,7 +82,7 @@ export default function CreateTheme() {
           </h1>
 
           <div className="kv">
-            <img src="/main-create-theme.svg" alt="Theme Talk" />
+            <img src="/main-create-theme.svg" width="300" height="236" alt="Theme Talk" />
           </div>
 
           <p className="description u-mb40">
@@ -338,6 +338,7 @@ export default function CreateTheme() {
 
           img {
             max-width: 100%;
+            margin: 0 auto;
           }
         }
 

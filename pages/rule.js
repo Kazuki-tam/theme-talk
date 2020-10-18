@@ -41,7 +41,7 @@ export default function Home() {
           </h1>
 
           <div className="kv">
-            <img src="/main-rule.svg" alt="Theme Talk" />
+            <img src="/main-rule.svg" width="400" height="243" alt="Theme Talk" />
           </div>
 
           <p className="description u-mb10">
@@ -391,6 +391,7 @@ export default function Home() {
 
           img {
             max-width: 100%;
+            margin: 0 auto;
           }
         }
 
@@ -423,6 +424,10 @@ export default function Home() {
 
         .img-des {
           border: 3px solid $main-color;
+
+          img {
+            margin: 0 auto;
+          }
         }
 
         .link {

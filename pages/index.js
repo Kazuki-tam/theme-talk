@@ -135,7 +135,7 @@ export default function Home() {
           </h1>
 
           <div className="kv">
-            <img src="/main.svg" alt="Theme Talk" />
+            <img src="/main.svg" width="400" height="251" alt="Theme Talk" />
           </div>
 
           <p className="description u-mb10">
@@ -319,6 +319,7 @@ export default function Home() {
         }
 
         .kv {
+          text-align: center;
           width: 400px;
           margin: 3rem auto;
 
@@ -328,6 +329,7 @@ export default function Home() {
 
           img {
             max-width: 100%;
+            margin: 0 auto;
           }
         }
 

@@ -216,7 +216,7 @@ export default function ThemeList() {
           </h1>
 
           <div className="kv">
-            <img src="/main-list.svg" alt="Theme Talk" />
+            <img src="/main-list.svg" width="300" height="256" alt="Theme Talk" />
           </div>
 
           <p className="description u-mb10">
@@ -471,6 +471,7 @@ export default function ThemeList() {
 
           img {
             max-width: 100%;
+            margin: 0 auto;
           }
         }
 

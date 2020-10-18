@@ -9,6 +9,7 @@ export default function Rule() {
   const memberList = Number(store.get("memberList"));
   const checkList = store.get("checkList");
   const categoryList = store.get("categoryList");
+  const customThemesList = store.get("customThemesList");
   const arryMemberList = Array.from({ length: memberList }, (_, i) => i + 1);
 
   let themes;
@@ -18,6 +19,8 @@ export default function Rule() {
     themes = schoolThemes;
   } else if (categoryList == "job-hunting") {
     themes = jobThemes;
+  } else if (categoryList == "custom-theme" && customThemesList) {
+    themes = customThemesList;
   } else {
     themes = generalThemes;
   }
@@ -155,6 +158,8 @@ export default function Rule() {
       categoryName = "学校向けテーマ";
     } else if (categoryList == "job-hunting") {
       categoryName = "就活対策テーマ";
+    } else if (categoryList == "custom-theme") {
+      categoryName = "カスタムテーマ";
     } else {
       categoryName = "一般的なテーマ";
     }
@@ -239,7 +244,7 @@ export default function Rule() {
           </div>
 
           <div className="btn-nav">
-            <button type="button" className="skip-btn" onClick={(e) => handleTheme(e.preventDefault(), "onlyTheme")}>＊テーマだけ変える</button>
+            <button type="button" className="skip-btn" onClick={(e) => handleTheme(e.preventDefault(), "onlyTheme")}>テーマだけ変える</button>
           </div>
         </div>
       </main>
@@ -496,6 +501,7 @@ export default function Rule() {
         }
 
         .skip-btn {
+          position: relative;
           display: inline-block;
           font-size: 1.6rem;
           background: transparent;
@@ -507,6 +513,20 @@ export default function Rule() {
           appearance: none;
           outline: none;
           cursor: pointer;
+
+          &::after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: .6em;
+            right: -2%;
+            width: .5em;
+            height: .5em;
+            border: 1px solid;
+            border-color: #0070f3 #0070f3 transparent transparent;
+            transform: rotate(45deg);
+            pointer-events: none;
+          }
 
           &:hover {
             text-decoration: none;

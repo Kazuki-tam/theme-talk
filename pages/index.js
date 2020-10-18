@@ -7,18 +7,22 @@ export default function Home() {
   let [category, changeCategory] = useState("general");
   let [member, changeMember] = useState(6);
   let [indexChecked, changeIndex] = useState(true);
-  let [themeChecked, changeTheme] = useState(true);
+  let [customTheme, changeCustomTheme] = useState(null);
 
   useEffect(() => {
     let memberList = store.get("memberList");
     let checkList = store.get("checkList");
     let categoryList = store.get("categoryList");
+    let customThemesList = store.get("customThemesList");
+
     if (memberList) {
       changeMember(memberList);
     }
     if (checkList) {
       changeIndex(checkList.duplicateIndex);
-      // changeTheme(checkList.duplicateTheme);
+    }
+    if (customThemesList) {
+      changeCustomTheme(customThemesList);
     }
     if (categoryList) {
       changeCategory(categoryList);
@@ -28,7 +32,6 @@ export default function Home() {
   function setSetting() {
     let checkList = {
       duplicateIndex: indexChecked,
-      // duplicateTheme: themeChecked
     };
     if (member < 1) {
       alert("入力は1~30までとなります");
@@ -80,6 +83,8 @@ export default function Home() {
       categoryName = "学校向けテーマ";
     } else if (category == "job-hunting") {
       categoryName = "就活対策テーマ";
+    } else if (category == "custom-theme" && customTheme.length > 0) {
+      categoryName = "カスタムテーマ";
     } else {
       categoryName = "一般的なテーマ";
     }
@@ -156,11 +161,13 @@ export default function Home() {
               <label for="form-select" className="form-label u-mb5">
                 テーマのジャンルを選択
               </label>
+              {customTheme && customTheme.length > 0 ? <p className="message u-mb10">＊カスタムテーマを選択できるようになりました。</p> : ""}
               <ThemeCategory />
               <select id="form-select" className="form-select" value={category} onChange={(e) => changeCategory(e.target.value)}>
                 <option value="general">一般的なテーマ</option>
                 <option value="school">学校向けテーマ</option>
                 <option value="job-hunting">就活対策テーマ</option>
+                {customTheme && customTheme.length > 0 ? <option value="custom-theme">カスタムテーマ</option> : ""}
               </select>
             </div>
 
@@ -178,12 +185,6 @@ export default function Home() {
               </label>
             </div>
 
-            {/* <div className="form-group u-mb20">
-              <label className="form-label">
-                <input className="u-mb20" type="checkbox" value="preventIndex" checked={themeChecked} onChange={(e) => handleTheme()} /> テーマの重複を防ぐ
-              </label>
-            </div> */}
-
             <div className="form-group u-mb20">
               <button type="button" className="btn u-mb20" onClick={() => setSetting()}>ゲームスタート</button>
             </div>
@@ -191,6 +192,12 @@ export default function Home() {
             {/* <div className="form-group u-mb20">
               <button type="button" className="share-btn sp-only" onClick={() => share()}>このアプリをシェアする</button>
             </div> */}
+
+            <div className="form-group u-mb20">
+              <Link href="/createtheme">
+                <a className="share-btn">テーマを作成する</a>
+              </Link>
+            </div>
 
             <div className="form-group">
               <Link href="/share">
@@ -464,7 +471,7 @@ export default function Home() {
             content: "";
             display: block;
             position: absolute;
-            bottom: 28%;
+            bottom: 2.2rem;
             right: 2%;
             width: 1.2rem;
             height: 1.2rem;
@@ -513,6 +520,12 @@ export default function Home() {
           transform: rotate(40deg);
           border-bottom: 3px solid $main-color;
           border-right: 3px solid $main-color;
+        }
+
+        .message {
+          font-size: 1.2rem;
+          color: $main-color;
+          margin-top: 0;
         }
 
         @media (max-width: 768px) {

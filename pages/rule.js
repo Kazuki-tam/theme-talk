@@ -55,6 +55,7 @@ export default function Home() {
               <h2 className="sub-headding">遊び方（サンプル）</h2>
               <ol className="order-list u-mb20">
                 <li className="order-list__item">まずは乾杯しましょう🍻</li>
+                <li className="order-list__item">テーマのジャンルを選択します。</li>
                 <li className="order-list__item">進行役はゲーム参加者へ1から順に番号を割り振ります。<br />(Zoomなどで利用する場合は名前の前に番号を記載すると分かり易いです)</li>
                 <li className="order-list__item">参加人数をフォームに入力します。</li>
                 <li className="order-list__item">「指名番号の重複を避ける」にチェックをつけると全員に必ず割り振るよう設定されます。（任意）</li>
@@ -66,12 +67,19 @@ export default function Home() {
               </ol>
 
               <p className="description u-mb10">
-                ＊事前にお題を確認しておくとよりスムーズに会話を進めることができます。
+                ＊事前にお題を確認しておくとよりスムーズに会話を進めることができます。<br />
+                事前にオリジナルなテーマを作成することもできます。
+              </p>
+
+              <p className="description u-mb10">
+                <Link href="/list">
+                  <a className="link">出題されるお題を確認する</a>
+                </Link>
               </p>
 
               <p className="description u-mb30">
-                <Link href="/list">
-                  <a className="link">出題されるお題を確認する</a>
+                <Link href="/createtheme">
+                  <a className="link">テーマを作成する</a>
                 </Link>
               </p>
 

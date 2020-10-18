@@ -21,6 +21,7 @@ export default function CreateTheme() {
 
     if (tmpThemes === "") {
       alert("テーマを入力してください!");
+      return false;
     } else if (filteredTheme.length > 0) {
       alert("入力したテーマは既に登録済みです😇");
       return false;
@@ -249,6 +250,10 @@ export default function CreateTheme() {
           counter-reset: order-list;
           list-style: none;
           padding: 0;
+
+          @media (max-width: 768px) {
+            font-size: 1.5rem;
+          }
         }
 
         .order-list__item {

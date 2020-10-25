@@ -354,21 +354,6 @@ export default function Rule() {
           }
         }
 
-        .footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          background: $main-color;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .footer-text {
-          font-size: 1.2rem;
-          color: #fff;
-        }
-
         .message-conainer {
           width: 680px;
           padding: 4rem 2rem;

@@ -138,82 +138,17 @@ export default function CreateTheme() {
       <style jsx>{`
         $main-color: #0070f3;
 
-        .sp-only {
-          display: none !important;
-
-          @media (max-width: 1020px) {
-            display: block !important;
-          }
-        }
-
-        .sp-text-left {
-          @media (max-width: 768px) {
-            text-align: left!important;
-          }
-        }
-
-        .sp-br-none {
-          @media (max-width: 768px) {
-            display: none !important;
-          }
-        }
-
-        main {
-          width: 100%;
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .container {
-          min-height: 100vh;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .inner-container {
-          width: 100%;
-
-          @media (max-width: 768px) {
-            padding: 0 1rem;
-            box-sizing: border-box;
-          }
-        }
-
-        .sec-content {
-          width: 600px;
-          margin-right: auto;
-          margin-left: auto;
-          text-align: center;
-
-          @media (max-width: 768px) {
-            width: 100%;
-            padding: 0 1rem;
-            box-sizing: border-box;
-          }
-        }
-
         .input-theme {
           display: flex;
         }
 
         .order-list {
-          font-size: 1.4rem;
+          font-size: 1.5rem;
           line-height: 1.4;
           text-align: left;
           counter-reset: order-list;
           list-style: none;
           padding: 0;
-
-          @media (max-width: 768px) {
-            font-size: 1.5rem;
-          }
         }
 
         .order-list__item {
@@ -240,52 +175,6 @@ export default function CreateTheme() {
           &:last-child {
             margin-bottom: 0;
           }
-        }
-
-        .sub-headding {
-          position: relative;
-          display: inline-block;
-          padding: 0 5.5rem;
-          text-align: center;
-          font-size: 2.4rem;
-          margin: 0;
-
-          &::before, &::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            display: inline-block;
-            width: 4.5rem;
-            height: 2px;
-            background-color: $main-color;
-          }
-
-          &::before {
-            left: 0;
-          }
-
-          &::after {
-            right: 0;
-          }
-
-          @media (max-width: 768px) {
-            font-size: 4.8vw;
-          }
-        }
-
-        .footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          background: $main-color;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .footer-text {
-          font-size: 1.2rem;
-          color: #fff;
         }
 
         .kv {
@@ -417,6 +306,7 @@ export default function CreateTheme() {
           display: inline-block;
           font-weight: bold;
           color: #0070f3;
+          max-width: 75%;
 
           @media (max-width: 768px) {
             max-width: 55%;

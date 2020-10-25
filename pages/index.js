@@ -215,69 +215,6 @@ export default function Home() {
       <style jsx>{`
         $main-color: #0070f3;
 
-        .sp-only {
-          display: none !important;
-
-          @media (max-width: 1020px) {
-            display: block !important;
-          }
-        }
-
-        .sp-text-left {
-          @media (max-width: 768px) {
-            text-align: left!important;
-          }
-        }
-
-        .sp-br-none {
-          @media (max-width: 768px) {
-            display: none !important;
-          }
-        }
-
-        main {
-          width: 100%;
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .container {
-          min-height: 100vh;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .inner-container {
-          width: 100%;
-
-          @media (max-width: 768px) {
-            padding: 0 1rem;
-            box-sizing: border-box;
-          }
-        }
-
-        .footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          background: $main-color;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .footer-text {
-          font-size: 1.2rem;
-          color: #fff;
-        }
-
         .kv {
           text-align: center;
           width: 400px;

@@ -135,125 +135,20 @@ export default function CreateTheme() {
         <p className="footer-text">Let's have fun together!!</p>
       </footer>
 
-      <style jsx global>{`
-        /* CSS Remedy */
-        *,::after,::before{box-sizing:border-box}html{line-sizing:normal}body{margin:0}h1{font-size:2rem}h2{font-size:1.5rem}h3{font-size:1.17rem}h4{font-size:1rem}h5{font-size:.83rem}h6{font-size:.67rem}h1{margin:.67em 0}pre{white-space:pre-wrap}hr{border-style:solid;border-width:1px 0 0;color:inherit;height:0;overflow:visible}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle;max-width:100%}canvas,img,svg,video{height:auto}audio{width:100%}img{border-style:none}svg{overflow:hidden}article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}
-        html,
-        body {
-          font-size: 62.5%;
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-
-        @for $i from 0 through 60 {
-          .u-mt#{$i * 5} {
-            margin-top: #{$i * 5}px;
-          }
-        }
-
-        @for $i from 0 through 60 {
-          .u-mb#{$i * 5} {
-            margin-bottom: #{$i * 5}px;
-          }
-        }
-        @for $i from 0 through 60 {
-          .u-ml#{$i * 5} {
-            margin-left: #{$i * 5}px;
-          }
-        }
-        @for $i from 0 through 60 {
-          .u-mr#{$i * 5} {
-            margin-right: #{$i * 5}px;
-          }
-        }
-      `}</style>
-
       <style jsx>{`
         $main-color: #0070f3;
-
-        .sp-only {
-          display: none !important;
-
-          @media (max-width: 1020px) {
-            display: block !important;
-          }
-        }
-
-        .sp-text-left {
-          @media (max-width: 768px) {
-            text-align: left!important;
-          }
-        }
-
-        .sp-br-none {
-          @media (max-width: 768px) {
-            display: none !important;
-          }
-        }
-
-        main {
-          width: 100%;
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .container {
-          min-height: 100vh;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .inner-container {
-          width: 100%;
-
-          @media (max-width: 768px) {
-            padding: 0 1rem;
-            box-sizing: border-box;
-          }
-        }
-
-        .sec-content {
-          width: 600px;
-          margin-right: auto;
-          margin-left: auto;
-          text-align: center;
-
-          @media (max-width: 768px) {
-            width: 100%;
-            padding: 0 1rem;
-            box-sizing: border-box;
-          }
-        }
 
         .input-theme {
           display: flex;
         }
 
         .order-list {
-          font-size: 1.4rem;
+          font-size: 1.5rem;
           line-height: 1.4;
           text-align: left;
           counter-reset: order-list;
           list-style: none;
           padding: 0;
-
-          @media (max-width: 768px) {
-            font-size: 1.5rem;
-          }
         }
 
         .order-list__item {
@@ -280,52 +175,6 @@ export default function CreateTheme() {
           &:last-child {
             margin-bottom: 0;
           }
-        }
-
-        .sub-headding {
-          position: relative;
-          display: inline-block;
-          padding: 0 5.5rem;
-          text-align: center;
-          font-size: 2.4rem;
-          margin: 0;
-
-          &::before, &::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            display: inline-block;
-            width: 4.5rem;
-            height: 2px;
-            background-color: $main-color;
-          }
-
-          &::before {
-            left: 0;
-          }
-
-          &::after {
-            right: 0;
-          }
-
-          @media (max-width: 768px) {
-            font-size: 4.8vw;
-          }
-        }
-
-        .footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          background: $main-color;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .footer-text {
-          font-size: 1.2rem;
-          color: #fff;
         }
 
         .kv {
@@ -457,6 +306,7 @@ export default function CreateTheme() {
           display: inline-block;
           font-weight: bold;
           color: #0070f3;
+          max-width: 75%;
 
           @media (max-width: 768px) {
             max-width: 55%;

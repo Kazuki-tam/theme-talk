@@ -1,7 +1,7 @@
-import App from 'next/app'
-import Router from 'next/router'
-
-import * as gtag from '../lib/gtag'
+import App from 'next/app';
+import Router from 'next/router';
+import '../styles/common.scss';
+import * as gtag from '../lib/gtag';
 
 Router.events.on('routeChangeComplete', url => gtag.pageview(url))
 

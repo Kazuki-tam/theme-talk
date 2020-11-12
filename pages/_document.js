@@ -5,7 +5,7 @@ import { GA_TRACKING_ID } from '../lib/gtag'
 export default class extends Document {
   render() {
     return (
-      <html>
+      <html lang="ja">
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
@@ -24,6 +24,7 @@ export default class extends Document {
           `,
             }}
           />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         </Head>
         <body>
           <Main />

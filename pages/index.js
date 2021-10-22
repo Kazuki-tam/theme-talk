@@ -7,6 +7,7 @@ export default function Home() {
   let [category, changeCategory] = useState("general");
   let [member, changeMember] = useState(6);
   let [indexChecked, changeIndex] = useState(true);
+  let [onlyTheme, changeOnlyTheme] = useState(false);
   let [customTheme, changeCustomTheme] = useState(null);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function Home() {
     }
     if (checkList) {
       changeIndex(checkList.duplicateIndex);
+      changeOnlyTheme(checkList.displayIndex)
     }
     if (customThemesList) {
       changeCustomTheme(customThemesList);
@@ -32,6 +34,7 @@ export default function Home() {
   function setSetting() {
     let checkList = {
       duplicateIndex: indexChecked,
+      displayIndex: onlyTheme,
     };
     if (member < 1) {
       alert("入力は1~30までとなります");
@@ -59,6 +62,14 @@ export default function Home() {
       changeIndex(false);
     } else {
       changeIndex(true);
+    }
+  }
+
+  function handleOnlyTheme () {
+    if (onlyTheme) {
+      changeOnlyTheme(false);
+    } else {
+      changeOnlyTheme(true);
     }
   }
 
@@ -182,6 +193,13 @@ export default function Home() {
               <label className="form-label">
                 <input className="checkbox-input" type="checkbox" value="preventIndex" checked={indexChecked} onChange={(e) => handleIndex()} /> 
                 <span className="checkbox-parts">指名番号の重複を避ける</span>
+              </label>
+            </div>
+
+            <div className="form-group u-mb20">
+              <label className="form-label">
+                <input className="checkbox-input" type="checkbox" value="onlyTheme" checked={onlyTheme} onChange={(e) => handleOnlyTheme()} />
+                <span className="checkbox-parts">指名番号を表示しない</span>
               </label>
             </div>
 

@@ -11,6 +11,7 @@ export default function Rule() {
   const categoryList = store.get("categoryList");
   const customThemesList = store.get("customThemesList");
   const arryMemberList = Array.from({ length: memberList }, (_, i) => i + 1);
+  const checkDisplayIndex = checkList && checkList.displayIndex;
 
   let themes;
   if (categoryList == "general") {
@@ -230,7 +231,9 @@ export default function Rule() {
           </h1>
 
           <div className="message-conainer">
-            <ShowNumber />
+            {!checkDisplayIndex && 
+              <ShowNumber />
+            }
             <ShowTheme />
             <p className="text">について話す</p>
             <ShowMessage />
